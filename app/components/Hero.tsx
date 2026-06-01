@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowDown, Mail, Martini } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageProvider";
+import { MartiniGlass } from "./CocktailArt";
 
 export function Hero() {
   const { t } = useLanguage();
@@ -31,7 +33,7 @@ export function Hero() {
           <div className="mt-9 flex flex-wrap gap-4">
             <a
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-soft hover:shadow-[var(--shadow-glow)]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-soft hover:shadow-(--shadow-glow)"
             >
               <Mail className="h-4 w-4" aria-hidden />
               {t.hero.ctaContact}
@@ -45,30 +47,35 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Portrait placeholder */}
+        {/* Portrait */}
         <div className="reveal is-visible flex justify-center lg:justify-end">
           <div className="group relative">
             <div
               aria-hidden
-              className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-gold/30 via-transparent to-gold-deep/20 blur-xl"
+              className="absolute -inset-3 rounded-4xl bg-linear-to-br from-gold/30 via-transparent to-gold-deep/20 blur-xl"
             />
-            <div className="relative aspect-[4/5] w-64 overflow-hidden rounded-[2rem] border border-gold/30 bg-gradient-to-b from-surface-2 to-night shadow-2xl sm:w-72">
-              {/*
-                PLACEHOLDER PORTRAIT.
-                To use a real photo: drop the file at public/javier.jpg and
-                replace this block with:
-                  <Image src="/javier.jpg" alt="Javier Rodríguez" fill
-                    className="object-cover" priority />
-                (import Image from "next/image")
-              */}
-              <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-center">
-                <span className="font-display text-7xl font-bold text-gold/80">
-                  JR
-                </span>
-                <span className="px-6 text-xs uppercase tracking-[0.2em] text-faint">
-                  Foto / Photo
-                </span>
-              </div>
+            <div className="relative aspect-4/5 w-64 overflow-hidden rounded-4xl border border-gold/30 bg-linear-to-b from-surface-2 to-night shadow-2xl sm:w-72">
+              <Image
+                src="/javier.jpg"
+                alt="Javier Rodríguez Rulas"
+                fill
+                priority
+                sizes="(min-width: 640px) 18rem, 16rem"
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+              {/* Blend the bottom into the dark frame */}
+              <div
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-night/80 via-night/20 to-transparent"
+              />
+            </div>
+
+            {/* Floating cocktail badge */}
+            <div
+              aria-hidden
+              className="absolute -bottom-4 -left-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-gold/30 bg-night/90 text-gold shadow-lg backdrop-blur sm:-left-5"
+            >
+              <MartiniGlass className="h-8 w-8" />
             </div>
           </div>
         </div>

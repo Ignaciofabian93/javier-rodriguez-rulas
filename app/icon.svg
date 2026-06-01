@@ -1,0 +1,23 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1c1814"/>
+      <stop offset="1" stop-color="#0b0a09"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="16" y1="12" x2="48" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e8c879"/>
+      <stop offset="1" stop-color="#b08d2a"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="15.25" stroke="#d4af37" stroke-opacity="0.35" stroke-width="1.5"/>
+  <!-- Martini glass -->
+  <g stroke="url(#gold)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M16 20 L32 36 L48 20 Z"/>
+    <path d="M16 20 H48"/>
+    <path d="M32 36 V48"/>
+    <path d="M24 48 H40"/>
+  </g>
+  <!-- Olive / garnish -->
+  <circle cx="38" cy="26" r="2.6" fill="#e8c879"/>
+</svg>

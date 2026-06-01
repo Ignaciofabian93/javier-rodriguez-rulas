@@ -15,7 +15,12 @@ const inter = Inter({
   display: "swap",
 });
 
+// Set NEXT_PUBLIC_SITE_URL to your production domain so social-share images
+// resolve to absolute URLs (e.g. https://javierrodriguez.cl).
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Javier Rodríguez Rulas — Bartender & Mixología",
   description:
     "Bartender internacional con mención en mixología. Portafolio profesional, cócteles de autor y mocktails. International bartender specialized in mixology.",
