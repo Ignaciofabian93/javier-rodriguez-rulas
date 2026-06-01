@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/*
+  Elegant dark "cocktail bar" theme.
+  Deep warm charcoal background with refined gold accents.
+*/
+@theme {
+  --color-night: #0b0a09;
+  --color-charcoal: #14110f;
+  --color-surface: #1c1814;
+  --color-surface-2: #261f1a;
+  --color-border: #3a302700;
+
+  --color-gold: #d4af37;
+  --color-gold-soft: #e8c879;
+  --color-gold-deep: #b08d2a;
+
+  --color-cream: #f7f3ec;
+  --color-muted: #b8ada0;
+  --color-faint: #8a7f73;
+
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-glow: 0 0 40px -8px rgba(212, 175, 55, 0.25);
+}
+
+:root {
+  --background: #0b0a09;
+  --foreground: #f7f3ec;
+  color-scheme: dark;
+}
+
+* {
+  border-color: rgba(212, 175, 55, 0.14);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle ambient texture: faint radial spotlights, like bar lighting */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 60rem at 75% -10%, rgba(212, 175, 55, 0.08), transparent 60%),
+    radial-gradient(50rem 50rem at 0% 100%, rgba(176, 141, 42, 0.06), transparent 55%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-night);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-deep);
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: var(--color-cream);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    animation: none;
+  }
+}
