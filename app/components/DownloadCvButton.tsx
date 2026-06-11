@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Download, Loader2 } from "lucide-react";
+import { Download } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageProvider";
 
 export function DownloadCvButton({
@@ -11,35 +10,15 @@ export function DownloadCvButton({
   className?: string;
   variant?: "solid" | "ghost";
 }) {
-  const { locale, t } = useLanguage();
-  const [loading, setLoading] = useState(false);
+  const { t } = useLanguage();
 
-  const handleDownload = async () => {
-    if (loading) return;
-    setLoading(true);
-    try {
-      // Dynamically import the PDF renderer so it stays out of the main bundle.
-      const [{ pdf }, { ResumeDocument }] = await Promise.all([
-        import("@react-pdf/renderer"),
-        import("./ResumeDocument"),
-      ]);
-      const blob = await pdf(<ResumeDocument locale={locale} />).toBlob();
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download =
-        locale === "es"
-          ? "CV-Javier-Rodriguez-Rulas.pdf"
-          : "Resume-Javier-Rodriguez-Rulas.pdf";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("Failed to generate CV PDF", err);
-    } finally {
-      setLoading(false);
-    }
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/Javier_Rodriguez_CV.pdf";
+    link.download = "Javier_Rodriguez_CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   };
 
   const base =
@@ -53,19 +32,10 @@ export function DownloadCvButton({
     <button
       type="button"
       onClick={handleDownload}
-      disabled={loading}
       className={`${base} ${styles} ${className}`}
     >
-      {loading ? (
-        <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-      ) : (
-        <Download className="h-4 w-4" aria-hidden />
-      )}
-      {loading
-        ? locale === "es"
-          ? "Generando..."
-          : "Generating..."
-        : t.nav.downloadCv}
+      <Download className="h-4 w-4" aria-hidden />
+      {t.nav.downloadCv}
     </button>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDown, Mail, Martini } from "lucide-react";
+import { Mail, Martini } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { MartiniGlass } from "./CocktailArt";
 
@@ -13,7 +13,7 @@ export function Hero() {
       id="top"
       className="relative flex min-h-screen items-center overflow-hidden px-5 pt-28 pb-16 sm:px-8"
     >
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1.15fr_0.85fr]">
         {/* Text */}
         <div className="reveal is-visible">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/25 bg-surface/50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold-soft">
@@ -54,9 +54,9 @@ export function Hero() {
               aria-hidden
               className="absolute -inset-3 rounded-4xl bg-linear-to-br from-gold/30 via-transparent to-gold-deep/20 blur-xl"
             />
-            <div className="relative aspect-4/5 w-64 overflow-hidden rounded-4xl border border-gold/30 bg-linear-to-b from-surface-2 to-night shadow-2xl sm:w-72">
+            <div className="relative aspect-3/4 w-84 overflow-hidden rounded-4xl border border-gold/30 bg-linear-to-b from-surface-2 to-night shadow-2xl md:w-70 lg:w-120">
               <Image
-                src="/javier.jpg"
+                src="/javier.jpeg"
                 alt="Javier Rodríguez Rulas"
                 fill
                 priority
@@ -82,13 +82,13 @@ export function Hero() {
       </div>
 
       {/* Scroll cue */}
-      <a
+      {/* <a
         href="#about"
         className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-faint transition-colors hover:text-gold sm:flex"
       >
         {t.hero.scroll}
         <ArrowDown className="h-4 w-4 animate-bounce" aria-hidden />
-      </a>
+      </a> */}
     </section>
   );
 }

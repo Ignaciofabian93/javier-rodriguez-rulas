@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 import {
   Mail,
-  Phone,
   MapPin,
   Send,
   Loader2,
@@ -12,9 +11,10 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { CONTACT } from "../i18n/content";
-import { InstagramIcon, LinkedInIcon, WhatsAppIcon } from "./BrandIcons";
+import { InstagramIcon } from "./BrandIcons";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
+import Link from "next/link";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -66,9 +66,8 @@ export function Contact() {
     "w-full rounded-xl border bg-night/60 px-4 py-3 text-sm text-cream placeholder:text-faint transition-colors focus:outline-none focus:ring-2 focus:ring-gold/40";
 
   const socials = [
-    { href: CONTACT.whatsapp, label: "WhatsApp", icon: WhatsAppIcon },
     { href: CONTACT.instagram, label: "Instagram", icon: InstagramIcon },
-    { href: CONTACT.linkedin, label: "LinkedIn", icon: LinkedInIcon },
+    // { href: CONTACT.linkedin, label: "LinkedIn", icon: LinkedInIcon },
   ];
 
   return (
@@ -100,19 +99,6 @@ export function Contact() {
                   </span>
                 </a>
               </li>
-              <li>
-                <a
-                  href={`tel:${CONTACT.phoneHref}`}
-                  className="group flex items-center gap-4 text-cream"
-                >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/25 bg-surface text-gold transition-colors group-hover:bg-gold group-hover:text-night">
-                    <Phone className="h-5 w-5" aria-hidden />
-                  </span>
-                  <span className="text-sm transition-colors group-hover:text-gold">
-                    {CONTACT.phone}
-                  </span>
-                </a>
-              </li>
               <li className="flex items-center gap-4 text-cream">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/25 bg-surface text-gold">
                   <MapPin className="h-5 w-5" aria-hidden />
@@ -127,7 +113,7 @@ export function Contact() {
               </p>
               <div className="flex gap-3">
                 {socials.map(({ href, label, icon: Icon }) => (
-                  <a
+                  <Link
                     key={label}
                     href={href}
                     target="_blank"
@@ -136,7 +122,7 @@ export function Contact() {
                     className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/25 bg-surface text-muted transition-colors hover:border-gold hover:text-gold"
                   >
                     <Icon className="h-5 w-5" aria-hidden />
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

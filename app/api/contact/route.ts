@@ -19,7 +19,10 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 },
+    );
   }
 
   const { name, email, message } = (body ?? {}) as Record<string, unknown>;
@@ -41,7 +44,8 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
   // Use Resend's onboarding sender unless a verified domain sender is provided.
-  const from = process.env.CONTACT_FROM_EMAIL || "Portfolio <onboarding@resend.dev>";
+  const from =
+    process.env.CONTACT_FROM_EMAIL || "Portfolio <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
     console.error(
@@ -64,12 +68,12 @@ export async function POST(request: Request) {
       from,
       to,
       replyTo: email.trim(),
-      subject: `Nuevo mensaje del portafolio — ${safeName}`,
+      subject: `Nuevo mensaje desde mi sitio web — ${safeName}`,
       text: `Nombre: ${name.trim()}\nCorreo: ${email.trim()}\n\nMensaje:\n${message.trim()}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; color: #1f1b17;">
           <div style="background:#14110f; color:#f7f3ec; padding:20px 24px; border-radius:12px 12px 0 0;">
-            <h2 style="margin:0; font-size:18px;">Nuevo mensaje del portafolio</h2>
+            <h2 style="margin:0; font-size:18px;">Nuevo mensaje desde mi sitio web</h2>
             <p style="margin:4px 0 0; color:#d4af37; font-size:13px;">Javier Rodríguez Rulas</p>
           </div>
           <div style="border:1px solid #e6ddcd; border-top:none; padding:24px; border-radius:0 0 12px 12px;">

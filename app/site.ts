@@ -7,7 +7,7 @@
  * images resolve to absolute URLs.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.javierrodriguezrulas.cl"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.barrajavier.com"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "Javier Rodríguez Rulas";

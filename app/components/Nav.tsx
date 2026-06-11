@@ -40,12 +40,12 @@ export function Nav() {
         >
           <Martini className="h-5 w-5 text-gold" aria-hidden />
           <span>
-            Javier <span className="text-gold">Rodríguez</span>
+            Javier <span className="text-gold">Rodríguez Rulas</span>
           </span>
         </a>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           {links.map((l) => (
             <a
               key={l.href}
@@ -57,13 +57,13 @@ export function Nav() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <LanguageToggle />
-          <DownloadCvButton className="!px-4 !py-2 text-xs" />
+          <DownloadCvButton className="px-4! py-2! text-xs" />
         </div>
 
         {/* Mobile controls */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
           <LanguageToggle />
           <button
             type="button"

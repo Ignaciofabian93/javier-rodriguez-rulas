@@ -8,18 +8,10 @@
 export type Locale = "es" | "en";
 
 export const CONTACT = {
-  // TODO: replace with Javier's real public email (also used as the "to"
-  // address for the contact form — see app/api/contact/route.ts / .env).
-  email: "javier.rodriguez@example.com",
-  // TODO: replace with Javier's phone number (international format for the link)
-  phone: "+56 9 0000 0000",
-  phoneHref: "+56900000000",
-  // TODO: replace with Javier's city / region
+  email: "javierrodriguezrulas01@gmail.com",
   city: "Santiago, Chile",
-  // TODO: replace with real profile URLs (or remove the ones he doesn't use)
-  instagram: "https://instagram.com/",
+  instagram: "https://www.instagram.com/javirodriguez2001/?hl=es",
   linkedin: "https://www.linkedin.com/",
-  whatsapp: "https://wa.me/56900000000",
 } as const;
 
 type Drink = {
@@ -147,14 +139,46 @@ export const content: Record<Locale, Section> = {
       mocktailDesc:
         "Cócteles sin alcohol elaborados con fruta fresca: opciones vibrantes, coloridas y refrescantes para todo tipo de público.",
       drinks: [
-        { name: "Mojito", desc: "Ron, menta fresca, lima y soda.", tag: "Refrescante" },
-        { name: "Tom Collins", desc: "Gin, limón, azúcar y soda.", tag: "Clásico" },
-        { name: "Aperol Spritz", desc: "Aperol, espumante y un toque de soda.", tag: "Aperitivo" },
-        { name: "Electric Lemonade", desc: "Vodka, blue curaçao y limonada.", tag: "De autor" },
-        { name: "Blue Curaçao", desc: "Cóctel azul, dulce y cítrico.", tag: "Vibrante" },
-        { name: "Margarita", desc: "Tequila, triple sec y jugo de lima.", tag: "Clásico" },
-        { name: "Martini", desc: "Gin o vodka con vermut, elegante y seco.", tag: "Elegante" },
-        { name: "Mocktails de fruta", desc: "Sin alcohol, con fruta fresca de temporada.", tag: "Sin alcohol" },
+        {
+          name: "Mojito",
+          desc: "Ron, menta fresca, lima y soda.",
+          tag: "Refrescante",
+        },
+        {
+          name: "Tom Collins",
+          desc: "Gin, limón, azúcar y soda.",
+          tag: "Clásico",
+        },
+        {
+          name: "Aperol Spritz",
+          desc: "Aperol, espumante y un toque de soda.",
+          tag: "Aperitivo",
+        },
+        {
+          name: "Electric Lemonade",
+          desc: "Vodka, blue curaçao y limonada.",
+          tag: "De autor",
+        },
+        {
+          name: "Blue Curaçao",
+          desc: "Cóctel azul, dulce y cítrico.",
+          tag: "Vibrante",
+        },
+        {
+          name: "Margarita",
+          desc: "Tequila, triple sec y jugo de lima.",
+          tag: "Clásico",
+        },
+        {
+          name: "Martini",
+          desc: "Gin o vodka con vermut, elegante y seco.",
+          tag: "Elegante",
+        },
+        {
+          name: "Mocktails de fruta",
+          desc: "Sin alcohol, con fruta fresca de temporada.",
+          tag: "Sin alcohol",
+        },
       ],
       coreTitle: "Competencias",
       core: [
@@ -201,7 +225,8 @@ export const content: Record<Locale, Section> = {
       submit: "Enviar mensaje",
       sending: "Enviando...",
       success: "¡Mensaje enviado! Gracias, te responderé pronto.",
-      error: "No se pudo enviar el mensaje. Inténtalo de nuevo o escríbeme directamente.",
+      error:
+        "No se pudo enviar el mensaje. Inténtalo de nuevo o escríbeme directamente.",
       orReach: "O contáctame por",
       required: "Este campo es obligatorio.",
       invalidEmail: "Ingresa un correo válido.",
@@ -255,14 +280,46 @@ export const content: Record<Locale, Section> = {
       mocktailDesc:
         "Alcohol-free cocktails made with fresh fruit: vibrant, colorful, and refreshing options for every guest.",
       drinks: [
-        { name: "Mojito", desc: "Rum, fresh mint, lime, and soda.", tag: "Refreshing" },
-        { name: "Tom Collins", desc: "Gin, lemon, sugar, and soda.", tag: "Classic" },
-        { name: "Aperol Spritz", desc: "Aperol, sparkling wine, a splash of soda.", tag: "Aperitif" },
-        { name: "Electric Lemonade", desc: "Vodka, blue curaçao, and lemonade.", tag: "Signature" },
-        { name: "Blue Curaçao", desc: "A sweet, citrusy blue cocktail.", tag: "Vibrant" },
-        { name: "Margarita", desc: "Tequila, triple sec, and lime juice.", tag: "Classic" },
-        { name: "Martini", desc: "Gin or vodka with vermouth — sleek and dry.", tag: "Elegant" },
-        { name: "Fruit mocktails", desc: "Alcohol-free, made with fresh seasonal fruit.", tag: "Alcohol-free" },
+        {
+          name: "Mojito",
+          desc: "Rum, fresh mint, lime, and soda.",
+          tag: "Refreshing",
+        },
+        {
+          name: "Tom Collins",
+          desc: "Gin, lemon, sugar, and soda.",
+          tag: "Classic",
+        },
+        {
+          name: "Aperol Spritz",
+          desc: "Aperol, sparkling wine, a splash of soda.",
+          tag: "Aperitif",
+        },
+        {
+          name: "Electric Lemonade",
+          desc: "Vodka, blue curaçao, and lemonade.",
+          tag: "Signature",
+        },
+        {
+          name: "Blue Curaçao",
+          desc: "A sweet, citrusy blue cocktail.",
+          tag: "Vibrant",
+        },
+        {
+          name: "Margarita",
+          desc: "Tequila, triple sec, and lime juice.",
+          tag: "Classic",
+        },
+        {
+          name: "Martini",
+          desc: "Gin or vodka with vermouth — sleek and dry.",
+          tag: "Elegant",
+        },
+        {
+          name: "Fruit mocktails",
+          desc: "Alcohol-free, made with fresh seasonal fruit.",
+          tag: "Alcohol-free",
+        },
       ],
       coreTitle: "Core skills",
       core: [
@@ -309,7 +366,8 @@ export const content: Record<Locale, Section> = {
       submit: "Send message",
       sending: "Sending...",
       success: "Message sent! Thank you — I'll get back to you soon.",
-      error: "The message could not be sent. Please try again or email me directly.",
+      error:
+        "The message could not be sent. Please try again or email me directly.",
       orReach: "Or reach me on",
       required: "This field is required.",
       invalidEmail: "Enter a valid email.",
