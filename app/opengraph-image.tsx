@@ -50,7 +50,7 @@ export default async function OpenGraphImage() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(90deg, rgba(11,10,9,0.94) 0%, rgba(11,10,9,0.78) 38%, rgba(11,10,9,0.25) 70%, rgba(11,10,9,0.05) 100%)",
+              "linear-gradient(90deg, rgba(11,10,9,0.97) 0%, rgba(11,10,9,0.9) 42%, rgba(11,10,9,0.5) 72%, rgba(11,10,9,0.12) 100%)",
           }}
         />
         {/* Bottom fade for legibility of the name */}
@@ -59,7 +59,7 @@ export default async function OpenGraphImage() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(0deg, rgba(11,10,9,0.85) 0%, rgba(11,10,9,0) 45%)",
+              "linear-gradient(0deg, rgba(11,10,9,0.95) 0%, rgba(11,10,9,0.25) 55%)",
           }}
         />
 
@@ -80,8 +80,9 @@ export default async function OpenGraphImage() {
               fontSize: 26,
               letterSpacing: 6,
               textTransform: "uppercase",
-              color: "#d4af37",
+              color: "#e8c879",
               fontFamily: "sans-serif",
+              textShadow: "0 2px 10px rgba(0,0,0,0.85)",
             }}
           >
             Bartender · Mixología
@@ -92,19 +93,30 @@ export default async function OpenGraphImage() {
               fontWeight: 700,
               lineHeight: 1.05,
               marginTop: 18,
+              color: "#f7f3ec",
+              textShadow: "0 3px 16px rgba(0,0,0,0.9)",
             }}
           >
-            Javier Rodríguez
+            Javier
           </div>
-          <div style={{ fontSize: 88, fontWeight: 700, color: "#e8c879" }}>
-            Rulas
+          <div
+            style={{
+              fontSize: 88,
+              fontWeight: 700,
+              lineHeight: 1.05,
+              color: "#e8c879",
+              textShadow: "0 3px 16px rgba(0,0,0,0.9)",
+            }}
+          >
+            Rodríguez Rulas
           </div>
           <div
             style={{
               fontSize: 30,
-              color: "#d8cfc4",
+              color: "#eadfd2",
               marginTop: 24,
               fontFamily: "sans-serif",
+              textShadow: "0 2px 10px rgba(0,0,0,0.85)",
             }}
           >
             Bartender internacional con mención en mixología
