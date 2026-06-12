@@ -106,7 +106,7 @@ const personJsonLd = {
   jobTitle: PERSON.jobTitle,
   description,
   url: SITE_URL,
-  image: `${SITE_URL}/javier.jpg`,
+  image: `${SITE_URL}/javier.jpeg`,
   knowsLanguage: ["es", "en"],
   address: {
     "@type": "PostalAddress",

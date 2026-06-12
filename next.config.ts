@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Prefer AVIF (smallest), fall back to WebP, then the original JPEG.
+    formats: ["image/avif", "image/webp"],
+  },
 };
 
 export default nextConfig;

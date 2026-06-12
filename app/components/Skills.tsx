@@ -1,30 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
-import {
-  MartiniGlass,
-  HighballGlass,
-  SpritzGlass,
-  TumblerGlass,
-  MocktailGlass,
-} from "./CocktailArt";
-
-// Glassware per drink, matched to the order of `drinks` in content.ts
-// (Mojito, Tom Collins, Aperol Spritz, Electric Lemonade, Blue Curaçao,
-//  Margarita, Martini, Fruit mocktails).
-const GLASSES = [
-  HighballGlass,
-  HighballGlass,
-  SpritzGlass,
-  HighballGlass,
-  TumblerGlass,
-  MartiniGlass,
-  MartiniGlass,
-  MocktailGlass,
-];
 
 export function Skills() {
   const { t } = useLanguage();
@@ -41,31 +21,53 @@ export function Skills() {
           {t.skills.intro}
         </Reveal>
 
-        {/* Drinks grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {t.skills.drinks.map((drink, i) => {
-            const Glass = GLASSES[i] ?? MocktailGlass;
-            return (
-              <Reveal
-                key={drink.name}
-                delay={(i % 4) * 80}
-                className="group relative flex flex-col rounded-2xl border border-gold/15 bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-(--shadow-glow)"
-              >
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold group-hover:text-night">
-                  <Glass className="h-7 w-7" />
-                </div>
-                <h3 className="font-display text-xl font-semibold text-cream">
+        {/* Drinks gallery */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {t.skills.drinks.map((drink, i) => (
+            <Reveal
+              key={drink.name}
+              delay={(i % 3) * 90}
+              className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-gold/15 bg-surface shadow-lg transition-all duration-500 hover:-translate-y-1 hover:border-gold/45 hover:shadow-(--shadow-glow)"
+            >
+              <Image
+                src={drink.image}
+                alt={drink.name}
+                fill
+                sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 90vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+              />
+
+              {/* Legibility gradient */}
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-linear-to-t from-night via-night/35 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100"
+              />
+              {/* Gold sheen on hover */}
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-linear-to-tr from-transparent via-transparent to-gold/15 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              />
+
+              {/* Tag chip */}
+              <span className="absolute left-4 top-4 inline-block rounded-full border border-gold/30 bg-night/60 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-gold-soft backdrop-blur">
+                {drink.tag}
+              </span>
+
+              {/* Caption */}
+              <div className="absolute inset-x-0 bottom-0 p-5">
+                <h3 className="font-display text-2xl font-semibold text-cream drop-shadow-sm">
                   {drink.name}
                 </h3>
-                <p className="mt-1.5 flex-1 text-sm leading-relaxed text-muted">
+                <p className="mt-1 max-h-24 overflow-hidden text-sm leading-relaxed text-muted opacity-100 transition-all duration-500 ease-out lg:max-h-0 lg:translate-y-1 lg:opacity-0 lg:group-hover:max-h-24 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">
                   {drink.desc}
                 </p>
-                <span className="mt-4 inline-block w-fit rounded-full border border-gold/25 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-gold-soft">
-                  {drink.tag}
-                </span>
-              </Reveal>
-            );
-          })}
+                <span
+                  aria-hidden
+                  className="mt-3 block h-px w-10 origin-left scale-x-100 bg-gold/60 transition-transform duration-500 group-hover:w-16"
+                />
+              </div>
+            </Reveal>
+          ))}
         </div>
 
         {/* Mocktails highlight + core skills */}
