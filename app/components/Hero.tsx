@@ -54,13 +54,14 @@ export function Hero() {
               aria-hidden
               className="absolute -inset-3 rounded-4xl bg-linear-to-br from-gold/30 via-transparent to-gold-deep/20 blur-xl"
             />
-            <div className="relative aspect-3/4 w-84 overflow-hidden rounded-4xl border border-gold/30 bg-linear-to-b from-surface-2 to-night shadow-2xl md:w-70 lg:w-120">
+            <div className="relative aspect-3/4 w-84 max-w-full overflow-hidden rounded-4xl border border-gold/30 bg-linear-to-b from-surface-2 to-night shadow-2xl md:w-70 lg:w-120">
               <Image
                 src="/javier.jpeg"
                 alt="Javier Rodríguez Rulas"
                 fill
                 priority
-                sizes="(min-width: 640px) 18rem, 16rem"
+                // Must match the container widths above (w-84 / md:w-70 / lg:w-120).
+                sizes="(min-width: 1024px) 30rem, (min-width: 768px) 17.5rem, 21rem"
                 className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
               />
               {/* Blend the bottom into the dark frame */}

@@ -97,6 +97,13 @@ body::before {
   animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Without JavaScript the observer never runs, so never hide content. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

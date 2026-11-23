@@ -58,7 +58,7 @@ export function Experience() {
           {/* vertical line */}
           <span
             aria-hidden
-            className="absolute left-[18px] top-2 bottom-2 w-px bg-gradient-to-b from-gold/40 via-gold/15 to-transparent"
+            className="absolute left-4.5 top-2 bottom-2 w-px bg-linear-to-b from-gold/40 via-gold/15 to-transparent"
           />
           <div className="space-y-8">
             {t.experience.items.map((item) => (

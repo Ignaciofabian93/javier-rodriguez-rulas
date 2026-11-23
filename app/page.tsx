@@ -17,7 +17,7 @@ export default function Home() {
         <Experience />
         <Contact />
       </main>
-      <Footer />
+      <Footer buildYear={new Date().getFullYear()} />
     </>
   );
 }

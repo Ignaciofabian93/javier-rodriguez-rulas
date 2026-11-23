@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   Mail,
   MapPin,
@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { CONTACT } from "../i18n/content";
+import { CONTACT_LIMITS, EMAIL_RE, HONEYPOT_FIELD } from "../contact-rules";
 import { InstagramIcon } from "./BrandIcons";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
@@ -18,29 +19,38 @@ import Link from "next/link";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export function Contact() {
   const { t } = useLanguage();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<{ [k: string]: string }>({});
+  // When the form became available; sent along so the API can drop
+  // submissions that are too fast to come from a person.
+  const mountedAt = useRef(0);
+
+  useEffect(() => {
+    mountedAt.current = Date.now();
+  }, []);
 
   const validate = (data: { name: string; email: string; message: string }) => {
     const next: { [k: string]: string } = {};
-    if (data.name.trim().length < 2) next.name = t.contact.required;
+    if (data.name.trim().length < CONTACT_LIMITS.name.min)
+      next.name = t.contact.required;
     if (!EMAIL_RE.test(data.email.trim())) next.email = t.contact.invalidEmail;
-    if (data.message.trim().length < 5) next.message = t.contact.required;
+    if (data.message.trim().length < CONTACT_LIMITS.message.min)
+      next.message = t.contact.required;
     return next;
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
+    const field = (n: string) =>
+      (form.elements.namedItem(n) as HTMLInputElement | HTMLTextAreaElement)
+        .value;
     const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement)
-        .value,
+      name: field("name"),
+      email: field("email"),
+      message: field("message"),
     };
 
     const validation = validate(data);
@@ -52,7 +62,11 @@ export function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          [HONEYPOT_FIELD]: field(HONEYPOT_FIELD),
+          elapsedMs: Date.now() - mountedAt.current,
+        }),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
@@ -151,6 +165,23 @@ export function Contact() {
                 className="rounded-2xl border border-gold/15 bg-surface p-6 sm:p-8"
               >
                 <div className="grid gap-5">
+                  {/* Honeypot: hidden from people and assistive tech; bots
+                      that auto-fill every field get silently dropped. */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute left-[-10000px] h-px w-px overflow-hidden"
+                  >
+                    <label htmlFor={HONEYPOT_FIELD}>Website</label>
+                    <input
+                      id={HONEYPOT_FIELD}
+                      name={HONEYPOT_FIELD}
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      defaultValue=""
+                    />
+                  </div>
+
                   <div>
                     <label
                       htmlFor="name"
@@ -163,13 +194,18 @@ export function Contact() {
                       name="name"
                       type="text"
                       autoComplete="name"
+                      maxLength={CONTACT_LIMITS.name.max}
                       placeholder={t.contact.namePlaceholder}
+                      aria-invalid={errors.name ? true : undefined}
+                      aria-describedby={errors.name ? "name-error" : undefined}
                       className={`${fieldClass} ${
                         errors.name ? "border-red-500/60" : "border-gold/20"
                       }`}
                     />
                     {errors.name && (
-                      <p className="mt-1 text-xs text-red-400">{errors.name}</p>
+                      <p id="name-error" className="mt-1 text-xs text-red-400">
+                        {errors.name}
+                      </p>
                     )}
                   </div>
 
@@ -185,13 +221,18 @@ export function Contact() {
                       name="email"
                       type="email"
                       autoComplete="email"
+                      maxLength={CONTACT_LIMITS.email.max}
                       placeholder={t.contact.emailPlaceholder}
+                      aria-invalid={errors.email ? true : undefined}
+                      aria-describedby={
+                        errors.email ? "email-error" : undefined
+                      }
                       className={`${fieldClass} ${
                         errors.email ? "border-red-500/60" : "border-gold/20"
                       }`}
                     />
                     {errors.email && (
-                      <p className="mt-1 text-xs text-red-400">
+                      <p id="email-error" className="mt-1 text-xs text-red-400">
                         {errors.email}
                       </p>
                     )}
@@ -208,20 +249,30 @@ export function Contact() {
                       id="message"
                       name="message"
                       rows={5}
+                      maxLength={CONTACT_LIMITS.message.max}
                       placeholder={t.contact.messagePlaceholder}
+                      aria-invalid={errors.message ? true : undefined}
+                      aria-describedby={
+                        errors.message ? "message-error" : undefined
+                      }
                       className={`${fieldClass} resize-y ${
                         errors.message ? "border-red-500/60" : "border-gold/20"
                       }`}
                     />
                     {errors.message && (
-                      <p className="mt-1 text-xs text-red-400">
+                      <p
+                        id="message-error"
+                        className="mt-1 text-xs text-red-400"
+                      >
                         {errors.message}
                       </p>
                     )}
                   </div>
 
                   {status === "error" && (
-                    <div className="flex items-start gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                    <div
+                      role="alert"
+                      className="flex items-start gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
                       <AlertCircle
                         className="mt-0.5 h-4 w-4 shrink-0"
                         aria-hidden

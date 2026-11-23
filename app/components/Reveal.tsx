@@ -4,8 +4,8 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /**
  * Fades + slides its children into view once when scrolled into the viewport.
- * Falls back gracefully (always visible) when IntersectionObserver is missing
- * or the user prefers reduced motion (handled in globals.css).
+ * Content stays visible without JavaScript or with reduced motion (both
+ * handled in globals.css).
  */
 export function Reveal({
   children,
@@ -24,10 +24,6 @@ export function Reveal({
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
-    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

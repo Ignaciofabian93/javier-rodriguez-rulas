@@ -1,11 +1,21 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { Martini } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageProvider";
 
-export function Footer() {
+const noopSubscribe = () => () => {};
+
+export function Footer({ buildYear }: { buildYear: number }) {
   const { t } = useLanguage();
-  const year = new Date().getFullYear();
+  // The page is prerendered, so the HTML carries the build year. Hydrate with
+  // that same value, then show the visitor's current year — no mismatch if
+  // the site isn't redeployed after New Year.
+  const year = useSyncExternalStore(
+    noopSubscribe,
+    () => new Date().getFullYear(),
+    () => buildYear,
+  );
 
   return (
     <footer className="border-t border-gold/10 px-5 py-10 sm:px-8">

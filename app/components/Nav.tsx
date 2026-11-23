@@ -77,9 +77,11 @@ export function Nav() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — same breakpoint as the hamburger (lg). `inert` keeps
+          the collapsed links out of the keyboard tab order. */}
       <div
-        className={`overflow-hidden border-gold/10 bg-night/95 backdrop-blur-md transition-[max-height] duration-300 md:hidden ${
+        inert={!open}
+        className={`overflow-hidden border-gold/10 bg-night/95 backdrop-blur-md transition-[max-height] duration-300 lg:hidden ${
           open ? "max-h-96 border-b" : "max-h-0"
         }`}
       >

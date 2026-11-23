@@ -1,8 +1,9 @@
 /**
  * Bilingual content for the portfolio.
  *
- * ⚠️ PLACEHOLDERS — replace the values marked with TODO with Javier's real
- * details (phone, city, email, social links, photo) before going live.
+ * `CONTACT.linkedin` is still a placeholder: replace it with Javier's profile
+ * URL, then re-enable the LinkedIn entry in components/Contact.tsx. (It is
+ * already left out of the JSON-LD while it has no profile path.)
  */
 
 export type Locale = "es" | "en";
